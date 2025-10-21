@@ -90,6 +90,30 @@ const Index = () => {
     }
   ];
 
+  const testimonials = [
+    {
+      name: "Алексей Соколов",
+      position: "Старший агент",
+      period: "В компании 2 года",
+      text: "Пришел в компанию стажером без опыта в продажах. Уже через 4 месяца закрыл первую крупную сделку и понял, что это мое. Сейчас зарабатываю в 5 раз больше, чем на прошлой работе.",
+      rating: 5
+    },
+    {
+      name: "Мария Петрова",
+      position: "Агент по недвижимости",
+      period: "В компании 1.5 года",
+      text: "После декрета боялась возвращаться на работу. Здесь меня обучили всему с нуля, дали гибкий график. За год вышла на стабильный доход 150К в месяц и построила свою базу клиентов.",
+      rating: 5
+    },
+    {
+      name: "Дмитрий Волков",
+      position: "Младший агент",
+      period: "В компании 8 месяцев",
+      text: "Менял сферу деятельности, искал что-то с перспективами роста. Программа обучения очень структурированная, наставник всегда на связи. Уже провожу показы самостоятельно и закрываю сделки.",
+      rating: 5
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
@@ -262,6 +286,38 @@ const Index = () => {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto px-4 py-16 bg-white">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Истории успеха</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Реальные отзывы наших агентов, которые начинали с нуля
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {testimonials.map((testimonial, index) => (
+            <Card key={index} className="hover:shadow-xl transition-all">
+              <CardHeader>
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <CardTitle className="text-lg mb-1">{testimonial.name}</CardTitle>
+                    <p className="text-sm text-muted-foreground">{testimonial.position}</p>
+                    <p className="text-xs text-muted-foreground">{testimonial.period}</p>
+                  </div>
+                  <div className="flex gap-0.5">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Icon key={i} name="Star" size={16} className="text-yellow-500 fill-yellow-500" />
+                    ))}
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">{testimonial.text}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
