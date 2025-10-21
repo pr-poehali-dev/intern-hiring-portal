@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Icon from "@/components/ui/icon";
 import { useState } from "react";
 
@@ -111,6 +112,33 @@ const Index = () => {
       period: "В компании 8 месяцев",
       text: "Менял сферу деятельности, искал что-то с перспективами роста. Программа обучения очень структурированная, наставник всегда на связи. Уже провожу показы самостоятельно и закрываю сделки.",
       rating: 5
+    }
+  ];
+
+  const faqItems = [
+    {
+      question: "Нужен ли опыт в недвижимости?",
+      answer: "Нет, опыт не требуется. Мы обучаем с нуля — от основ рынка недвижимости до закрытия сделок. Главное — желание развиваться и учиться."
+    },
+    {
+      question: "Сколько длится обучение?",
+      answer: "Базовый курс — 6 недель. Первые 2 недели — теория, затем практика с наставником. После обучения вы сможете самостоятельно работать с клиентами и закрывать сделки."
+    },
+    {
+      question: "Какой график работы?",
+      answer: "График гибкий. Вы сами планируете встречи с клиентами и показы. Обязательны еженедельные планерки и отчеты. Для стажеров предусмотрены обучающие сессии по расписанию."
+    },
+    {
+      question: "Как формируется доход?",
+      answer: "Фиксированная ставка + процент от каждой сделки. Стажер получает от 50К, младший агент — от 80К, опытный агент — от 120К. Потолка по доходу нет — все зависит от ваших результатов."
+    },
+    {
+      question: "Предоставляете ли вы клиентскую базу?",
+      answer: "Да. Стажерам и младшим агентам мы предоставляем готовую базу клиентов для работы. По мере роста вы будете формировать собственную базу и получать больший процент."
+    },
+    {
+      question: "Что нужно для старта?",
+      answer: "Желание развиваться, коммуникабельность и смартфон. Всем необходимым для работы — CRM-система, обучающие материалы, поддержка наставника — мы обеспечим."
     }
   ];
 
@@ -318,6 +346,31 @@ const Index = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Частые вопросы</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Ответы на вопросы, которые чаще всего задают кандидаты
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqItems.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="bg-white border rounded-lg px-6">
+                  <AccordionTrigger className="text-left font-semibold hover:no-underline">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </section>
 
