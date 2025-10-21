@@ -1,11 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 
 const Privacy = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <SEO 
+        title="Политика конфиденциальности — РеалтиКарьера"
+        description="Политика обработки и защиты персональных данных РеалтиКарьера. Информация о сборе, использовании и защите ваших данных."
+        canonicalUrl="https://intern-hiring-portal.poehali.dev/privacy"
+      />
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
