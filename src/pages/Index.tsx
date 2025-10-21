@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Icon from "@/components/ui/icon";
 import { useState } from "react";
@@ -13,9 +14,14 @@ const Index = () => {
     email: "",
     message: ""
   });
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!agreedToTerms) {
+      alert("Пожалуйста, дайте согласие на обработку персональных данных");
+      return;
+    }
     console.log("Form submitted:", formData);
   };
 
@@ -430,7 +436,22 @@ const Index = () => {
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     />
                   </div>
-                  <Button type="submit" className="w-full" size="lg">
+                  <div className="flex items-start gap-3 pt-2">
+                    <Checkbox 
+                      id="terms" 
+                      checked={agreedToTerms}
+                      onCheckedChange={(checked) => setAgreedToTerms(checked === true)}
+                      className="mt-1"
+                    />
+                    <label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                      Я согласен на обработку персональных данных в соответствии с{" "}
+                      <a href="#privacy" className="text-primary hover:underline">
+                        политикой конфиденциальности
+                      </a>
+                      {" "}и даю согласие на получение информационных материалов
+                    </label>
+                  </div>
+                  <Button type="submit" className="w-full" size="lg" disabled={!agreedToTerms}>
                     Отправить заявку
                   </Button>
                 </form>
@@ -452,6 +473,7 @@ const Index = () => {
               <a href="#training" className="hover:text-foreground transition-colors">Обучение</a>
               <a href="#career" className="hover:text-foreground transition-colors">Карьера</a>
               <a href="#contacts" className="hover:text-foreground transition-colors">Контакты</a>
+              <a href="#privacy" className="hover:text-foreground transition-colors">Политика конфиденциальности</a>
             </div>
             <p className="text-sm text-muted-foreground">© 2024 РеалтиКарьера</p>
           </div>
