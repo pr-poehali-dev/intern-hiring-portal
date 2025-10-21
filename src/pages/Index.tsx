@@ -17,14 +17,45 @@ const Index = () => {
     message: ""
   });
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreedToTerms) {
       alert("Пожалуйста, дайте согласие на обработку персональных данных");
       return;
     }
-    console.log("Form submitted:", formData);
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/16fcd5fc-7d67-4f9d-8d48-311466d47d54', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus('success');
+        setFormData({ name: "", phone: "", email: "", message: "" });
+        setAgreedToTerms(false);
+        alert('Спасибо! Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.');
+      } else {
+        setSubmitStatus('error');
+        alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте еще раз.');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте еще раз.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const vacancies = [
@@ -454,8 +485,8 @@ const Index = () => {
                       {" "}и даю согласие на получение информационных материалов
                     </label>
                   </div>
-                  <Button type="submit" className="w-full" size="lg" disabled={!agreedToTerms}>
-                    Отправить заявку
+                  <Button type="submit" className="w-full" size="lg" disabled={!agreedToTerms || isSubmitting}>
+                    {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
                   </Button>
                 </form>
               </CardContent>
