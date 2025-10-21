@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Icon from "@/components/ui/icon";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [formData, setFormData] = useState({
@@ -445,9 +446,9 @@ const Index = () => {
                     />
                     <label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
                       Я согласен на обработку персональных данных в соответствии с{" "}
-                      <a href="#privacy" className="text-primary hover:underline">
+                      <Link to="/privacy" className="text-primary hover:underline">
                         политикой конфиденциальности
-                      </a>
+                      </Link>
                       {" "}и даю согласие на получение информационных материалов
                     </label>
                   </div>
@@ -473,7 +474,7 @@ const Index = () => {
               <a href="#training" className="hover:text-foreground transition-colors">Обучение</a>
               <a href="#career" className="hover:text-foreground transition-colors">Карьера</a>
               <a href="#contacts" className="hover:text-foreground transition-colors">Контакты</a>
-              <a href="#privacy" className="hover:text-foreground transition-colors">Политика конфиденциальности</a>
+              <Link to="/privacy" className="hover:text-foreground transition-colors">Политика конфиденциальности</Link>
             </div>
             <p className="text-sm text-muted-foreground">© 2024 РеалтиКарьера</p>
           </div>
